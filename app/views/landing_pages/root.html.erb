@@ -1,16 +1,13 @@
+<%= render partial: 'navbar' %>
+
 <div class="jumbotron">
   <div class="container">
     <h1>Quiz Master</h1>
     <p>Challenge your friends or students with quizzes<p>
     <%= link_to 'Get started', '/auth/auth0', class: 'btn btn-lg btn-primary' %>
-
-    <% if authenticated? %>
-      <p>
-        Hello <%= current_user.info.try(:name) || current_user.info.try(:email) %>!
-      </p>
-    <% end %>
   </div>
 </div>
+
 <div class="container">
   <%= render partial: 'flash_messages' %>
 </div>

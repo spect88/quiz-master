@@ -5,6 +5,11 @@ class ApplicationController < ActionController::Base
   protected
 
   def set_current_user
-    @current_user = session[:user]
+    return if session[:user_id].nil?
+    @current_user = User.find_by(id: session[:user_id])
+  end
+
+  def authenticated?
+    @current_user.present?
   end
 end
