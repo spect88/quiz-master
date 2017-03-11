@@ -15,7 +15,7 @@ describe LandingPagesController do
 
     context 'when user is authenticated' do
       before do
-        user = User.create!(uid: 'auth0|123', provider: 'auth0')
+        user = FactoryGirl.create(:user)
         session[:user_id] = user.id
         get :root
       end

@@ -1,0 +1,13 @@
+<div class="container">
+  <h2><%= @quiz.title %></h2>
+  <p><%= @quiz.description %></p>
+
+  <button class="btn btn-lg btn-primary">Take the quiz</button>
+
+  <p>
+    <small>
+      Created on <%= @quiz.created_at.to_formatted_s(:db) %>
+      by <%= @quiz.user.name %>
+    </small>
+  <p>
+</div>

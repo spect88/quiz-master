@@ -4,7 +4,7 @@ require 'rails_helper'
 shared_examples 'auth required' do
   context 'when user is authenticated' do
     before do
-      user = User.create!(uid: 'auth0|456', provider: 'auth0', info: {})
+      user = FactoryGirl.create(:user)
       session[:user_id] = user.id
       action
     end

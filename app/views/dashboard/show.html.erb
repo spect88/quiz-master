@@ -1,5 +1,4 @@
-<%= render partial: 'navbar' %>
-
 <div class="container">
-  <p>Welcome!</p>
+  <h2>Latest quizzes</h2>
+  <%= render partial: 'quizzes_list', locals: { quizzes: @latest_quizzes } %>
 </div>

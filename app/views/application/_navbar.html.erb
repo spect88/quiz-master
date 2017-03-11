@@ -21,12 +21,12 @@
       <% if authenticated? %>
         <ul class="nav navbar-nav">
           <li class="<%= 'active' if active_controller?(:dashboard) %>">
-            <a href="#">
+            <%= link_to dashboard_path do %>
               Dashboard
               <% if active_controller?(:dashboard) %>
                 <span class="sr-only">(current)</span>
               <% end %>
-            </a>
+            <% end %>
           </li>
         </ul>
       <% end %>
