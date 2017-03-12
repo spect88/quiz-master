@@ -5,8 +5,9 @@ require_relative './shared_examples_for_auth_required'
 describe QuizzesController do
   describe 'show' do
     it_behaves_like 'auth required' do
+      let(:action) { :show }
       let(:quiz) { FactoryGirl.create(:quiz) }
-      let(:action) { get :show, params: { id: quiz.id } }
+      let(:params) { { id: quiz.id } }
     end
 
     context 'when user is authenticated' do

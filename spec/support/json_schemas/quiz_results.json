@@ -1,0 +1,22 @@
+{
+  "type": "object",
+  "required": ["correct", "incorrect", "total"],
+  "properties": {
+    "correct": { "type": "integer" },
+    "incorrect": { "type": "integer" },
+    "total": { "type": "integer" },
+    "questions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["question", "answer", "correct", "expected"],
+        "properties": {
+          "question": { "type": "string" },
+          "answer": { "type": "string" },
+          "correct": { "type": "boolean" },
+          "expected": { "type": "string" }
+        }
+      }
+    }
+  }
+}

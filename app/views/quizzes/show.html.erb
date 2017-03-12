@@ -1,8 +1,7 @@
 <div class="container">
   <h2><%= @quiz.title %></h2>
-  <p><%= @quiz.description %></p>
 
-  <button class="btn btn-lg btn-primary">Take the quiz</button>
+  <%= render_quiz_component(@quiz) %>
 
   <p>
     <small>
@@ -10,4 +9,5 @@
       by <%= @quiz.user.name %>
     </small>
   <p>
+
 </div>

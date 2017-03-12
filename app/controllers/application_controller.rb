@@ -12,6 +12,8 @@ class ApplicationController < ActionController::Base
     @current_user = User.find_by(id: session[:user_id])
   end
 
+  attr_reader :current_user
+
   def authenticated?
     @current_user.present?
   end
@@ -21,7 +23,7 @@ class ApplicationController < ActionController::Base
   end
 
   def render_500(error)
-    logger.error "Uncaught error: #{error.to_s}\n#{error.backtrace.join('\n')}"
+    logger.error "Uncaught error: #{error.to_s}\n#{error.backtrace.join("\n")}"
     render template: 'errors/500', status: 500
   end
 end

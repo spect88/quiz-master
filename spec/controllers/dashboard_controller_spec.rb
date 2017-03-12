@@ -5,7 +5,7 @@ require_relative './shared_examples_for_auth_required'
 describe DashboardController do
   describe 'show' do
     it_behaves_like 'auth required' do
-      let(:action) { get :show }
+      let(:action) { :show }
     end
 
     describe 'when user is authenticated' do

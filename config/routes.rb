@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  resources :quizzes, only: [:show]
+
+  resources :quizzes, only: [:show] do
+    resources :results, only: [:create]
+  end
 
   get '/dashboard' => 'dashboard#show', as: 'dashboard'
 

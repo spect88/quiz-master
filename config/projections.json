@@ -1,0 +1,17 @@
+{
+  "app/assets/javascripts/components/*.es6.jsx": {
+    "command": "jcomponent",
+    "template": [
+      "class {camelcase|capitalize} extends React.Component {",
+      "  render() {",
+      "    return (",
+      "      <div></div>",
+      "    );",
+      "  }",
+      "}",
+      "",
+      "{camelcase|capitalize}.propTypes = {",
+      "};"
+    ]
+  }
+}

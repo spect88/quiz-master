@@ -32,7 +32,7 @@ quiz = Quiz.create!(
         answer: '26'
       },
       {
-        question: 'Hom many vowels are there in the English alphabet?',
+        question: 'How many vowels are there in the English alphabet?',
         answer: '5'
       }
     ]
