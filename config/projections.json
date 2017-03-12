@@ -1,6 +1,7 @@
 {
   "app/assets/javascripts/components/*.es6.jsx": {
     "command": "jcomponent",
+    "alternate": "spec/javascripts/components/{}_spec.es6.jsx",
     "template": [
       "class {camelcase|capitalize} extends React.Component {",
       "  render() {",
@@ -12,6 +13,20 @@
       "",
       "{camelcase|capitalize}.propTypes = {",
       "};"
+    ]
+  },
+  "spec/javascripts/components/*_spec.es6.jsx": {
+    "command": "jcomponentspec",
+    "alternate": "app/assets/javascripts/components/{}.es6.jsx",
+    "template": [
+      "describe('{camelcase|capitalize} component', () => {",
+      "  let component, domNode;",
+      "",
+      "  beforeEach(() => {",
+      "    component = TestUtils.renderIntoDocument(<{camelcase|capitalize}/>);",
+      "    domNode = ReactDOM.findDOMNode(component);",
+      "  });",
+      "});"
     ]
   }
 }

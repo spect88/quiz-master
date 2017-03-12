@@ -9,7 +9,7 @@ class QuizResultsDetails extends React.Component {
     return <div className="list-group">{details}</div>;
   }
 
-  renderAnswerDetails(question) {
+  renderAnswerDetails(question, questionId) {
     const correctAnswer =
       question.correct
       ? ''
@@ -21,7 +21,7 @@ class QuizResultsDetails extends React.Component {
       : this.renderLabel('danger', 'incorrect');
 
     return (
-      <div className="list-group-item">
+      <div className="list-group-item" key={questionId}>
         <p>{question.question}</p>
         <p><strong>Your answer:</strong> {question.answer} {resultLabel}</p>
         {correctAnswer}

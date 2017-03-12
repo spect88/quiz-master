@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
 
   resources :quizzes, only: [:show] do
     resources :results, only: [:create]
