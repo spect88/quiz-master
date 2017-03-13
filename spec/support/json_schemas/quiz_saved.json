@@ -1,0 +1,10 @@
+{
+  "type": "object",
+  "required": ["location"],
+  "properties": {
+    "location": {
+      "type": "string",
+      "pattern": "^/quizzes/\\d+$"
+    }
+  }
+}

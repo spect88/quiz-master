@@ -9,4 +9,8 @@ module QuizzesHelper
       hash['content']['questions'].map! { |q| q.except('answer') }
     end
   end
+
+  def render_quiz_editor_component(quiz)
+    react_component('QuizEditor', quiz: quiz.as_json)
+  end
 end

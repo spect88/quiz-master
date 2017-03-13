@@ -36,12 +36,6 @@ class QuizEnd extends React.Component {
     const answers = this.props.answers;
 
     QM.submitAnswers(quizId, answers)
-      .then((response) => {
-        if (response.status >= 200 && response.status < 300) {
-          return response.json();
-        }
-        throw new Error(`HTTP Status Code: ${response.status}`);
-      })
       .then((json) => {
         this.setState({ waiting: false, results: json });
       })

@@ -5,6 +5,8 @@ class QuizResultsDetails extends React.Component {
   }
 
   render() {
+    if (!this.props.results.questions) return null;
+
     const details = this.props.results.questions.map(this.renderAnswerDetails);
     return <div className="list-group">{details}</div>;
   }

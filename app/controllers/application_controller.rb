@@ -2,8 +2,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :set_current_user
 
-  rescue_from StandardError, with: :render_500
+  rescue_from StandardError, with: :render_500 if Rails.env.production?
   rescue_from ActiveRecord::RecordNotFound, with: :render_404
+  rescue_from AccessControl::AccessDenied, with: :render_403
 
   protected
 
@@ -16,6 +17,10 @@ class ApplicationController < ActionController::Base
 
   def authenticated?
     @current_user.present?
+  end
+
+  def render_403(_error)
+    render template: 'errors/500', status: 403
   end
 
   def render_404(_error)

@@ -19,7 +19,8 @@ module ApplicationHelper
     content_tag(:div, message, class: "alert #{flash_type_to_class(type)}")
   end
 
-  def active_controller?(name)
-    params[:controller] == name.to_s
+  def active_controller?(name, action = nil)
+    params[:controller] == name.to_s &&
+      (action.nil? || params[:action] == action.to_s)
   end
 end

@@ -42,3 +42,18 @@ window.fixtures.quizResults = function() {
     ]
   };
 };
+
+// editable in the sense that it's not stripped down for viewing
+window.fixtures.editableQuiz = function() {
+  return {
+    id: 1,
+    title: 'Test Quiz',
+    description: 'Lorem ipsum dolor sit amet',
+    content: {
+      questions: [
+        { question: 'Test Question 1', answer: '1' },
+        { question: 'Test Question 2', answer: '2' },
+      ]
+    }
+  };
+};

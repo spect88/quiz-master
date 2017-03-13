@@ -11,7 +11,7 @@ module AuthRequired
     session[:return_to] = request.path if request.get? && !request.xhr?
 
     if request.xhr?
-      render status: 403, json: {
+      render status: 401, json: {
         error: 'Authentication required',
         location: sign_in_url
       }

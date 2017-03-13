@@ -12,14 +12,15 @@ shared_examples 'auth required' do
   end
 
   context 'when user is authenticated' do
+    let(:user) { FactoryGirl.create(:user) }
+
     before do
-      user = FactoryGirl.create(:user)
       session[:user_id] = user.id
       call_action
     end
 
-    it 'returns 200' do
-      expect(response.status).to eq(200)
+    it 'returns 20X' do
+      expect(response.status.to_s).to match(/20\d/)
     end
   end
 
@@ -32,8 +33,8 @@ shared_examples 'auth required' do
         expect(session[:return_to]).to be_nil
       end
 
-      it 'returns 403 and error in JSON format'  do
-        expect(response.status).to eq(403)
+      it 'returns 401 and error in JSON format'  do
+        expect(response.status).to eq(401)
 
         json = ActiveSupport::JSON.decode(response.body).with_indifferent_access
         expect(json[:error]).to eq('Authentication required')

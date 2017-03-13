@@ -26,11 +26,14 @@ gem 'redis-rails'
 gem 'omniauth'
 gem 'omniauth-auth0'
 
+gem 'schash'
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'json-schema'
   gem 'jasmine-rails'
+  gem 'shoulda-matchers'
 
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri

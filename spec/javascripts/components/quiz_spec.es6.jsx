@@ -107,7 +107,7 @@ describe('Quiz component', () => {
     });
 
     it('displays the results', (done) => {
-      submitAnswersDeferred.resolve(fake200Response(fixtures.quizResults()));
+      submitAnswersDeferred.resolve(fixtures.quizResults());
       nextTick(() => {
         expect(domNode.textContent).toContain('Your score: 67% (2/3)');
         done();

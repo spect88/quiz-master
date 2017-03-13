@@ -1,1 +1,1 @@
-window.TestUtils = React.addons.TestUtils
+window.TestUtils = React.addons.TestUtils;

@@ -28,6 +28,15 @@
               <% end %>
             <% end %>
           </li>
+          <li class="<%= 'active' if active_controller?(:quizzes, :new) %>">
+            <%= link_to new_quiz_path do %>
+              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+              New Quiz
+              <% if active_controller?(:quizzes, :new) %>
+                <span class="sr-only">(current)</span>
+              <% end %>
+            <% end %>
+          </li>
         </ul>
       <% end %>
 
