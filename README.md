@@ -19,6 +19,8 @@ brew services start redis
 brew install rbenv
 # edit .bashrc or similar and restart shell
 rbenv install 2.4.0
+gem install bundler
+rbenv rehash
 ```
 
 Finally to setup the database:
@@ -26,6 +28,12 @@ Finally to setup the database:
 ```shell
 createdb quiz_master_dev
 createdb quiz_master_test
+```
+
+And get Ruby dependencies:
+
+```shell
+bundle
 ```
 
 ## Development
