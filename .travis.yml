@@ -1,6 +1,10 @@
 language: ruby
-services:
+
+addons:
 - postgresql: '9.5'
+
+services:
+- postgresql
 - redis-server
 
 before_script:
