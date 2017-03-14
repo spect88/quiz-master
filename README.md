@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/spect88/quiz-master.svg?branch=master)](https://travis-ci.org/spect88/quiz-master)
+
 # Quiz Master
 
 Example app using [Rails 5][1], [Auth0][2] and [React][3].
