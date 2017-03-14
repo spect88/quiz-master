@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :quizzes, dependent: :destroy
+  has_many :results, class_name: 'QuizResult', dependent: :destroy
 
   store_accessor :info, :name, :nickname, :email, :image
 

@@ -27,6 +27,7 @@ gem 'omniauth'
 gem 'omniauth-auth0'
 
 gem 'schash'
+gem 'numbers_in_words'
 
 group :development, :test do
   gem 'rspec-rails'

@@ -1,5 +1,4 @@
 FactoryGirl.define do
-
   factory :user do
     sequence(:uid) { |n| "test|#{n}" }
     provider 'factories.rb'
@@ -33,4 +32,28 @@ FactoryGirl.define do
     end
   end
 
+  factory :quiz_result do
+    user
+    quiz
+    score 1
+    max_score 2
+    details do
+      {
+        questions: [
+          {
+            question: 'How many letters are there in the English alphabet?',
+            answer: 'twenty-six',
+            correct: true,
+            expected: '26'
+          },
+          {
+            question: 'How many vowels are there in the English alphabet?',
+            answer: '4',
+            correct: false,
+            expected: '5'
+          }
+        ]
+      }
+    end
+  end
 end

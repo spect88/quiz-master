@@ -7,37 +7,27 @@ require_dependency File.expand_path(
 
 class Quiz < ApplicationRecord
   belongs_to :user
+  has_many :results, class_name: 'QuizResult', dependent: :destroy
 
   validates :title, presence: true, length: { maximum: 256 }
   validates :content, presence: true, quiz_content_schema: true
   validates :user, presence: true
 
   def submit_answers(answers:, user:)
-    # FIXME: temporary stub
-    {
-      correct: 1,
-      incorrect: 2,
-      total: 3,
-      questions: [
-        {
-          question: 'Question one',
-          answer: 'one',
-          correct: true,
-          expected: '1'
-        },
-        {
-          question: 'Question two',
-          answer: '22',
-          correct: false,
-          expected: '2'
-        },
-        {
-          question: 'Question three',
-          answer: '6',
-          correct: false,
-          expected: '3'
-        }
-      ]
-    }
+    result = AnswerChecker.new(self).check(answers)
+
+    # Persist this result in the database
+    results.create(
+      user: user,
+      score: result[:correct],
+      max_score: result[:total],
+      details: { questions: result[:questions] }
+    )
+
+    result
+  end
+
+  def questions
+    content.try(:[], 'questions')
   end
 end

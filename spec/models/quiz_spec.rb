@@ -18,4 +18,23 @@ describe Quiz do
       .not_to allow_value(questions: nil)
       .for(:content)
   end
+
+  describe '#submit_answers' do
+    let(:quiz) { FactoryGirl.create(:quiz) }
+    let(:user) { FactoryGirl.create(:user) }
+    let(:answers) { ['twenty-six', '6'] }
+
+    it 'returns results returned by answer checker' do
+      expect_any_instance_of(AnswerChecker).to receive(:check).and_call_original
+      quiz.submit_answers(answers: answers, user: user)
+    end
+
+    it 'persists the results' do
+      expect { quiz.submit_answers(answers: answers, user: user) }
+        .to change { QuizResult.count }
+        .by(1)
+      result = QuizResult.find_by(user: user, quiz: quiz)
+      expect(result).not_to be_nil
+    end
+  end
 end
