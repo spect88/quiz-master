@@ -26,19 +26,26 @@ class Quiz extends React.Component {
   }
 
   renderCurrentStep() {
+    const { quiz } = this.props;
+
     if (this.state.step === -1) {
-      return <QuizStart quiz={this.props.quiz} onStart={this.onNextStep} />;
+      return <QuizStart quiz={quiz} onStart={this.onNextStep} />;
     }
 
     if (this.state.step >= this.props.quiz.content.questions.length) {
-      return <QuizEnd quiz={this.props.quiz} answers={this.state.answers} />;
+      const preparedAnswers = this.state.answers.map(a => a.answer);
+      return <QuizEnd quiz={quiz} answers={preparedAnswers} />;
     }
+
+    const question = quiz.content.questions[this.state.step];
+    const answer = this.state.answers[this.state.step];
 
     return (
       <QuizQuestion
-        quiz={this.props.quiz}
+        question={question}
         questionId={this.state.step}
-        answer={this.state.answers[this.state.step]}
+        questionsCount={quiz.content.questions.length}
+        answer={answer}
         onPrevious={this.onPreviousStep}
         onNext={this.onNextStep}
         onAnswer={this.onAnswerChange} />
@@ -50,6 +57,19 @@ class Quiz extends React.Component {
   }
 
   onNextStep() {
+    if (this.state.step >= 0) {
+      // let's just validate if something has been entered
+      const answer = this.state.answers[this.state.step];
+
+      if (answer.answer == '') {
+        this.onAnswerChange(this.state.step, {
+          answer: '',
+          answerError: 'Answer can\'t be blank'
+        });
+        return;
+      }
+    }
+
     this.setState({ step: this.state.step + 1 });
   }
 
@@ -63,7 +83,7 @@ class Quiz extends React.Component {
     const array = new Array(number);
 
     for (let i = 0; i < number; i++) {
-      array[i] = '';
+      array[i] = { answer: '', answerError: null };
     }
 
     return array;

@@ -45,6 +45,8 @@ describe('Quiz component', () => {
 
     describe('for question in the middle', () => {
       beforeEach(() => {
+        // type in any answer, just so that validation passes
+        component.onAnswerChange(0, { answer: 'non-blank-answer' });
         // proceed to second question
         component.onNextStep();
       });
@@ -54,6 +56,16 @@ describe('Quiz component', () => {
         expect(buttonLabels).toContain('Next');
         expect(buttonLabels).toContain('Previous');
       });
+
+      describe('when answer is empty and trying to go forward', () => {
+        it('displays validation error', () => {
+          expect(selectTextContent('.text-danger', domNode))
+            .not.toEqual('Answer can\'t be blank');
+          component.onNextStep();
+          expect(selectTextContent('.text-danger', domNode))
+            .toEqual('Answer can\'t be blank');
+        });
+      });
     });
 
     describe('for last question', () => {
@@ -61,6 +73,7 @@ describe('Quiz component', () => {
         // go from first to last question (click n-1 times)
         const questionsCount = quiz.content.questions.length;
         for (let i = 0; i < questionsCount - 1; i++) {
+          component.onAnswerChange(i, { answer: 'something valid' });
           component.onNextStep();
         }
       });
@@ -97,7 +110,7 @@ describe('Quiz component', () => {
 
         // let's also fill in the answers
         if (i < questionsCount) {
-          component.onAnswerChange(i, expectedAnswers[i]);
+          component.onAnswerChange(i, { answer: expectedAnswers[i] });
         }
       }
     });

@@ -6,27 +6,20 @@ class QuizQuestion extends React.Component {
   }
 
   render() {
-    const answerInputId = 'quiz_question_' + this.props.questionId;
-    const questionsCount = this.props.quiz.content.questions.length;
-    const currentQuestion =
-      this.props.quiz.content.questions[this.props.questionId].question;
+    const { questionId, question, answer, questionsCount } = this.props;
+    const answerInputId = 'quiz_question_' + questionId;
 
     return (
       <div>
-        <ProgressBar step={this.props.questionId + 1} outOf={questionsCount} />
-        <MarkdownContent content={currentQuestion} />
+        <ProgressBar step={questionId + 1} outOf={questionsCount} />
+        <MarkdownContent content={question.question} />
         <form onSubmit={this.onSubmit}>
-          <div className="form-group">
-            <label htmlFor={answerInputId}>Answer</label>
-            <input
-              type="text"
-              id={answerInputId}
-              className="form-control"
-              value={this.props.answer}
-              autoComplete="off"
-              autoFocus
-              onChange={this.onAnswerChange} />
-          </div>
+          <InputField
+            id={answerInputId}
+            model={answer}
+            attribute="answer"
+            label="Answer"
+            onChange={this.onAnswerChange} />
         </form>
         <div className="btn-group">
           {this.renderPreviousButton()}
@@ -50,7 +43,7 @@ class QuizQuestion extends React.Component {
 
   renderNextButton() {
     const label =
-      (this.props.questionId < this.props.quiz.content.questions.length - 1)
+      (this.props.questionId < this.props.questionsCount - 1)
       ? 'Next'
       : 'Submit';
 
@@ -63,9 +56,8 @@ class QuizQuestion extends React.Component {
     );
   }
 
-  onAnswerChange(event) {
-    const answer = event.target.value;
-    this.props.onAnswer(this.props.questionId, answer);
+  onAnswerChange(answerModel) {
+    this.props.onAnswer(this.props.questionId, answerModel);
   }
 
   onSubmit(event) {
@@ -75,9 +67,10 @@ class QuizQuestion extends React.Component {
 }
 
 QuizQuestion.propTypes = {
-  quiz: React.PropTypes.object,
+  question: React.PropTypes.object,
   questionId: React.PropTypes.number,
-  answer: React.PropTypes.string,
+  questionsCount: React.PropTypes.number,
+  answer: React.PropTypes.object,
   onPrevious: React.PropTypes.func,
   onNext: React.PropTypes.func,
   onAnswer: React.PropTypes.func
