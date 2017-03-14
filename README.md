@@ -46,7 +46,9 @@ rails s
 rails c
 
 # Run the tests
-rake
+rake # backend
+rake spec:javascripts # frontend
+open http://localhost:3000/specs # frontend when rails server is up
 ```
 
 ### Adding frontend npm dependencies
