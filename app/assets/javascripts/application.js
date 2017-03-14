@@ -12,7 +12,7 @@
 //
 //= require polyfills
 //= require turbolinks
-//= require react
+//= require npm-deps
 //= require react_ujs
 //= require components
 //= require_tree .

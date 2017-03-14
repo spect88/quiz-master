@@ -49,6 +49,18 @@ rails c
 rake
 ```
 
+### Adding frontend npm dependencies
+
+Since this project uses `sprockets` (and switching to something else would
+mean ditching `jasmine-rails` and possibly additional hacks as well), npm
+dependencies have to be declared in a separate manifest, where you can
+also make their exports global.
+
+Check out [npm\_deps/](npm_deps/index.js) and [npm\_deps/](npm_deps/test.js).
+
+Note that you'll need `yarn` (or `npm`) to  bundle the modules if you make
+any changes. The output bundles are checked in to the repo for simplicity.
+
 ## Deployment
 
 The app is supposed to be run on a [twelve-factor][8]-compatible PaaS provider

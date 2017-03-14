@@ -22,3 +22,6 @@
 
 # Ignore rspec example status file
 /spec/examples.txt
+
+# Ignore npm modules
+/node_modules

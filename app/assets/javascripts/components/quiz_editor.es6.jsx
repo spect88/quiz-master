@@ -73,14 +73,14 @@ class QuizEditor extends React.Component {
         id: quiz.id || null,
         title: quiz.title || '',
         titleError: null,
-        description: quiz.description || ''
+        description: richTextSerializer.deserialize(quiz.description)
       },
       questions:
         quiz.content
         ? extendQuestions(quiz.content.questions)
         : [
           {
-            question: '',
+            question: richTextSerializer.deserialize(''),
             questionError: null,
             answer: '',
             answerError: null
@@ -93,7 +93,7 @@ class QuizEditor extends React.Component {
     function extendQuestions(questions) {
       return questions.map(({ question, answer }) => {
         return {
-          question,
+          question: richTextSerializer.deserialize(question),
           questionError: null,
           answer,
           answerError: null
@@ -105,11 +105,15 @@ class QuizEditor extends React.Component {
   serializeForm() {
     return {
       title: this.state.metadata.title,
-      description: this.state.metadata.description,
+      description:
+        richTextSerializer.serialize(this.state.metadata.description),
       content: {
         questions: this.state.questions
           .map(({ question, answer }) => {
-            return { question, answer };
+            return {
+              question: richTextSerializer.serialize(question),
+              answer
+            };
           })
       }
     };
@@ -139,9 +143,11 @@ class QuizEditor extends React.Component {
 
   validateQuestions(questions) {
     return questions.map(({ question, answer }) => {
+      const questionIsBlank = richTextSerializer.isRichTextBlank(question);
+
       return {
         question,
-        questionError: (question == '') ? 'Question can\'t be blank' : null,
+        questionError: (questionIsBlank) ? 'Question can\'t be blank' : null,
         answer,
         answerError: (answer == '') ? 'Answer can\'t be blank' : null
       }

@@ -1,0 +1,18 @@
+{
+  "name": "quiz-master",
+  "private": true,
+  "license": "MIT",
+  "dependencies": {
+    "aliasify": "^2.1.0",
+    "browserify": "^14.0.0",
+    "browserify-incremental": "^3.1.0",
+    "marked": "^0.3.6",
+    "react": "^15.4.2",
+    "react-addons-test-utils": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-rte": "^0.11.0"
+  },
+  "scripts": {
+    "bundle": "./npm_deps/bundle-npm-deps-into-vendor.js"
+  }
+}

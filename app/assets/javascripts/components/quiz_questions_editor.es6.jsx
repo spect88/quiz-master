@@ -42,7 +42,7 @@ class QuizQuestionsEditor extends React.Component {
     // create a copy of questions array and append a blank question
     const questions = this.props.questions.slice(0);
     questions.push({
-      question: '',
+      question: rte.createEmptyValue(),
       questionError: null,
       answer: '',
       answerError: null

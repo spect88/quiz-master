@@ -14,19 +14,21 @@ describe('QuizEditor component', () => {
           id: null,
           title: '',
           titleError: null,
-          description: ''
+          description: jasmine.any(rte.EditorValue)
         });
+        expect(isBlank(component.state.metadata.description)).toBe(true);
       });
 
       it('sets up a single blank and valid question', () => {
         expect(component.state.questions).toEqual([
           {
-            question: '',
+            question: jasmine.any(rte.EditorValue),
             questionError: null,
             answer: '',
             answerError: null
           }
         ]);
+        expect(isBlank(component.state.questions[0].question)).toBe(true);
       });
     });
 
@@ -41,13 +43,18 @@ describe('QuizEditor component', () => {
           id: quiz.id,
           title: quiz.title,
           titleError: null,
-          description: quiz.description
+          description: jasmine.any(rte.EditorValue)
         });
       });
 
       it('marks existing questions as valid', () => {
         const expected = quiz.content.questions.map(q => {
-          return { ...q, questionError: null, answerError: null };
+          return {
+            ...q,
+            question: jasmine.any(rte.EditorValue),
+            questionError: null,
+            answerError: null
+          };
         });
 
         expect(component.state.questions).toEqual(expected);
@@ -64,7 +71,7 @@ describe('QuizEditor component', () => {
 
       differentMetadata = {
         title: quiz.title + '!!!',
-        description: quiz.description + '...'
+        description: rte.createEmptyValue()
       };
 
       component.onMetadataChange(differentMetadata);
@@ -134,7 +141,7 @@ describe('QuizEditor component', () => {
       submit();
 
       expect(component.state.questions).toEqual([{
-        question: '',
+        question: jasmine.any(rte.EditorValue),
         questionError: 'Question can\'t be blank',
         answer: '',
         answerError: 'Answer can\'t be blank'
@@ -197,5 +204,9 @@ describe('QuizEditor component', () => {
   function render() {
     component = TestUtils.renderIntoDocument(<QuizEditor quiz={quiz}/>);
     domNode = ReactDOM.findDOMNode(component);
+  }
+
+  function isBlank(richText) {
+    return richTextSerializer.isRichTextBlank(richText);
   }
 });

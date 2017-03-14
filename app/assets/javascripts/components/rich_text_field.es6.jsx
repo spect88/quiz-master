@@ -5,28 +5,27 @@ class RichTextField extends React.Component {
   }
 
   render() {
-    const value = this.props.model[this.props.attribute] || '';
+    const value = this.props.model[this.props.attribute];
     const error = this.props.model[this.props.attribute + 'Error'];
 
     return (
       <div className={'form-group' + (error ? ' has-error' : '')}>
         <label htmlFor={this.props.id}>{this.props.label}</label>
-        <textarea
-          id={this.props.id}
-          className="form-control"
+        <RichTextEditor
           value={value}
-          onChange={this.onChange}/>
+          onChange={this.onChange}
+          className="rich-text-editor" />
         <ErrorMessage error={error}/>
       </div>
     );
   }
 
-  onChange(event) {
+  onChange(value) {
     const modifiedModel = {
       // preserve other attributes of model
       ...this.props.model,
       // modify changed value
-      [this.props.attribute]: event.target.value,
+      [this.props.attribute]: value,
       // clear validation errors
       [this.props.attribute + 'Error']: null
     };

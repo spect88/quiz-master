@@ -2,7 +2,7 @@ class QuizStart extends React.Component {
   render () {
     return (
       <div>
-        <p>{this.props.quiz.description}</p>
+        <MarkdownContent content={this.props.quiz.description}/>
         <button className="btn btn-lg btn-primary" onClick={this.props.onStart}>
           Take the quiz
         </button>

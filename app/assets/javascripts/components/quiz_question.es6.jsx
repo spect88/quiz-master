@@ -8,11 +8,13 @@ class QuizQuestion extends React.Component {
   render() {
     const answerInputId = 'quiz_question_' + this.props.questionId;
     const questionsCount = this.props.quiz.content.questions.length;
+    const currentQuestion =
+      this.props.quiz.content.questions[this.props.questionId].question;
 
     return (
       <div>
         <ProgressBar step={this.props.questionId + 1} outOf={questionsCount} />
-        <p>{this.renderCurrentQuestion()}</p>
+        <MarkdownContent content={currentQuestion} />
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
             <label htmlFor={answerInputId}>Answer</label>
@@ -32,10 +34,6 @@ class QuizQuestion extends React.Component {
         </div>
       </div>
     );
-  }
-
-  renderCurrentQuestion() {
-    return this.props.quiz.content.questions[this.props.questionId].question;
   }
 
   renderPreviousButton() {
