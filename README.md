@@ -72,6 +72,32 @@ Since it's a 12-factor app, configuration should be provided via environment
 variables. The full list of mandatory variables can be found in the
 [secrets.yml](config/secrets.yml) file.
 
+## Notes on tech choice
+
+TL;DR: Next time I probably won't go with `react-rails`.
+
+It's my first time using React, so I wasn't sure how to go about it. I didn't
+want to completely separate Rails and JS, because it's usually faster to
+maintain the whole thing together. When researching different options I've
+learned that `react-rails` supports Turbolinks, so that sounded perfect -
+I should be able to quickly build a traditional Rails app with some React
+components and it'll still be running as nicely as a SPA.
+
+Later I've realised that in order to keep using sprockets I'm pretty much
+forced to use `jasmine-rails` if I want to test my React components.
+
+The next problem was that I needed external React libraries (`react-rte`
+most notably) and these are usually only available as npm modules. I could
+have used `browserify-rails`, but that'd break my `jasmine-rails` setup.
+
+In order not to have to rewrite a lot of setup, I've added my custom npm
+modules bundling solution, which relies on rebuilding vendored files on
+every npm dependency change, and a single entry file (`npm_deps/index.js`),
+exposing all the npm stuff as global variables.
+
+I kind of expected my journey with `react-rails` to be more pleasant.
+Next time I'll most likely go with [react_on_rails][10].
+
 [1]: http://rubyonrails.org/
 [2]: https://auth0.com/
 [3]: https://facebook.github.io/react/
@@ -81,3 +107,4 @@ variables. The full list of mandatory variables can be found in the
 [7]: https://brew.sh/
 [8]: https://12factor.net/
 [9]: https://heroku.com/
+[10]: https://github.com/shakacode/react_on_rails
