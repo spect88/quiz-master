@@ -1,0 +1,10 @@
+language: ruby
+services:
+- postgresql: '9.5'
+- redis-server
+
+before_script:
+- psql -c 'CREATE DATABASE quiz_master_test;' -U postgres
+- bundle exec rake db:test:prepare RAILS_ENV=test
+
+script: rake spec spec:javascripts
