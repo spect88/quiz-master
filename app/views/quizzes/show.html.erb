@@ -1,5 +1,20 @@
 <div class="container">
+
   <h2><%= @quiz.title %></h2>
+
+  <% if @quiz.owned_by?(current_user) %>
+    <div class="form-group">
+      <%= link_to 'Edit', edit_quiz_path(@quiz.id), class: 'btn btn-default' %>
+    </div>
+  <% end %>
+
+  <% if @quiz.taken_by?(current_user) %>
+    <p class="text-info">You have already taken this quiz!</p>
+    <p class="text-info">
+      <strong>Your score:</strong>
+      <%= human_readable_score(@quiz.results_of(current_user).last) %>
+    </p>
+  <% end %>
 
   <%= render_quiz_component(@quiz) %>
 

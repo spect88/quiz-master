@@ -30,4 +30,16 @@ class Quiz < ApplicationRecord
   def questions
     content.try(:[], 'questions')
   end
+
+  def owned_by?(user)
+    user_id == user.id
+  end
+
+  def results_of(user)
+    results.where(user: user)
+  end
+
+  def taken_by?(user)
+    results_of(user).exists?
+  end
 end

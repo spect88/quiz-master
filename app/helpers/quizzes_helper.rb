@@ -19,4 +19,8 @@ module QuizzesHelper
   def prerendering_enabled?
     Rails.application.config.prerender_react
   end
+
+  def human_readable_score(result)
+    "#{result.score_percentage}% (#{result.score}/#{result.max_score})"
+  end
 end

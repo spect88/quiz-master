@@ -1,6 +1,6 @@
 <div class="list-group">
   <% quizzes.each do |quiz| %>
-    <%= link_to quiz_path(quiz.id), class: 'list-group-item' do %>
+    <%= link_to quiz_path(quiz.id), class: quiz_list_item_class(quiz) do %>
       <strong><%= quiz.title %></strong>
       <span class="pull-right">
         Created by <b><%= quiz.user.name %></b>
