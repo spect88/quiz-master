@@ -10,9 +10,9 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require polyfills
 //= require turbolinks
 //= require npm-deps
+//= require polyfills
 //= require react_ujs
 //= require components
 //= require_tree .
