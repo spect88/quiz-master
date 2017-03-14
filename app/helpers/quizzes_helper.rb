@@ -1,6 +1,7 @@
 module QuizzesHelper
   def render_quiz_component(quiz)
-    react_component('Quiz', quiz: quiz_data_without_answers(quiz))
+    props = { quiz: quiz_data_without_answers(quiz) }
+    react_component('Quiz', props, prerender: true)
   end
 
   def quiz_data_without_answers(quiz)
@@ -11,6 +12,7 @@ module QuizzesHelper
   end
 
   def render_quiz_editor_component(quiz)
-    react_component('QuizEditor', quiz: quiz.as_json)
+    props = { quiz: quiz.as_json }
+    react_component('QuizEditor', props, prerender: true)
   end
 end
