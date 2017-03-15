@@ -199,4 +199,38 @@ describe QuizzesController do
       end
     end
   end
+
+  describe 'destroy' do
+    let(:user) { FactoryGirl.create(:user) }
+    let(:quiz) { FactoryGirl.create(:quiz, user: user) }
+
+    context 'when user is authenticated' do
+      before { session[:user_id] = user.id }
+
+      context 'when deleting their own quiz' do
+        it 'redirects to dashboard' do
+          delete :destroy, params: { id: quiz.id }
+          expect(response).to redirect_to dashboard_path
+        end
+
+        it 'marks the quiz as deleted' do
+          expect { delete :destroy, params: { id: quiz.id } }
+            .to change { quiz.reload.deleted? }
+            .from(false)
+            .to(true)
+        end
+      end
+
+      context 'when deleting someone else\'s quiz' do
+        let(:someone_elses_quiz) { FactoryGirl.create(:quiz) }
+        before do
+          delete :destroy, params: { id: someone_elses_quiz.id }
+        end
+
+        it 'returns 403' do
+          expect(response.status).to eq(403)
+        end
+      end
+    end
+  end
 end

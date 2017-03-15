@@ -2,7 +2,7 @@ class QuizzesController < ApplicationController
   include AuthRequired
   include AccessControl
 
-  before_action :find_quiz, only: %i[show edit update]
+  before_action :find_quiz, only: %i[show edit update destroy]
 
   def show
   end
@@ -40,6 +40,15 @@ class QuizzesController < ApplicationController
     end
   end
 
+  def destroy
+    ensure_owner!(@quiz.user)
+
+    @quiz.mark_as_deleted!
+
+    flash[:notice] = "Quiz #{@quiz.title} has been deleted."
+    redirect_to dashboard_path
+  end
+
   protected
 
   def quiz_attributes
@@ -51,6 +60,7 @@ class QuizzesController < ApplicationController
   end
 
   def find_quiz
-    @quiz = Quiz.find(params[:id])
+    @quiz = Quiz.existing.find_by(id: params[:id])
+    raise ActiveRecord::RecordNotFound if @quiz.nil?
   end
 end

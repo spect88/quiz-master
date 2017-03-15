@@ -6,6 +6,8 @@ require_dependency File.expand_path(
   '../../validators/quiz_content_schema_validator', __FILE__)
 
 class Quiz < ApplicationRecord
+  include Deletable
+
   belongs_to :user
   has_many :results, class_name: 'QuizResult', dependent: :destroy
 

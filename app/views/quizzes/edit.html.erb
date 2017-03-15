@@ -1,4 +1,14 @@
 <div class="container">
   <h2>Edit Quiz</h2>
+
   <%= render_quiz_editor_component(@quiz) %>
+
+  <div class="form-group pull-right">
+    <%=
+      button_to 'Delete this quiz',
+        quiz_path(@quiz.id),
+        class: 'btn btn-xs btn-danger',
+        method: :delete
+    %>
+  </div>
 </div>

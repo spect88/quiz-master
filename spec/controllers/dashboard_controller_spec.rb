@@ -22,6 +22,13 @@ describe DashboardController do
           expect(response.body).to match(quiz.title)
         end
       end
+
+      it 'doesn\'t include deleted quizzes' do
+        quiz = FactoryGirl.create(:quiz)
+        quiz.mark_as_deleted!
+        get :show
+        expect(response.body).not_to match(quiz.title)
+      end
     end
   end
 end

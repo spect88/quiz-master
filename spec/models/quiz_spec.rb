@@ -1,5 +1,7 @@
 require 'rails_helper'
 
+require_relative './shared_examples_for_deletable'
+
 describe Quiz do
   it { is_expected.to belong_to(:user) }
   it { is_expected.to validate_presence_of(:user) }
@@ -17,6 +19,10 @@ describe Quiz do
     is_expected
       .not_to allow_value(questions: nil)
       .for(:content)
+  end
+
+  it_behaves_like 'deletable' do
+    let(:model) { FactoryGirl.create(:quiz) }
   end
 
   describe '#submit_answers' do
