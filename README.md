@@ -4,6 +4,8 @@
 
 Example app using [Rails 5][1], [Auth0][2] and [React][3].
 
+Check it out in action at https://spect88-quiz-master.herokuapp.com/
+
 ## Dependencies
 
 [Ruby 2.4.0][4], [Postgres][5] and [Redis][6] are required to run the app.
